@@ -2,6 +2,12 @@ from django.shortcuts import render
 
 
 def main(request):
+    # content = {
+    #     'title': 'Продукты',
+    #     'links_menu': links_menu,
+    #     'same_products': same_products,
+    # }
+
     return render(request, 'mainapp/index.html')
 
 
