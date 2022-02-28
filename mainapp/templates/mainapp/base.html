@@ -5,25 +5,25 @@
 	<meta charset="utf-8">
 	<title>
         {% block title %}
-            {{ title|title }}
-        {% endblock %}
+            {{ title|capfirst }}
+        {% endblock title %}
     </title>
     {% block css %}
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
-    {% endblock %}
+    {% endblock css %}
 
     {% block js %}
-    {% endblock %}
+    {% endblock js %}
 </head>
 <body>
     <div class="container">
     {% block menu %}
-    {% endblock %}
+    {% endblock menu %}
 
 
     {% block content %}
-    {% endblock %}
+    {% endblock content %}
     </div>
 
     {% block footer %}
@@ -35,7 +35,7 @@
                <h3>полезная информация</h3>
             </div>
         </div>
-    {% endblock %}
+    {% endblock footer %}
 
 </body>
 </html>

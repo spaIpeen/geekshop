@@ -1,25 +1,13 @@
 from django.shortcuts import render
 import datetime
+import json
+import pathlib
 
 
 def main(request):
     title = 'главная'
-    products = [
-        {
-            "name": "Отличный стул",
-            "desc": "Расположитесь комфортно.",
-            "image_src": "product-1.jpg",
-            "image_href": "/product/1/",
-            "alt": "продукт 1",
-        },
-        {
-            "name": "Стул повышенного качества",
-            "desc": "Не оторваться.",
-            "image_src": "product-2.jpg",
-            "image_href": "/product/2/",
-            "alt": "продукт 2",
-        },
-    ]
+    with open(f'{pathlib.Path().absolute()}/mainapp/templates/mainapp/json/products.json') as f:
+        products = json.load(f)
     content = {
         'title': title,
         'products': products,
@@ -30,8 +18,14 @@ def main(request):
 
 def products(request):
     title = 'продукты'
+    with open(f'{pathlib.Path().absolute()}/mainapp/templates/mainapp/json/links.json') as f:
+        links_menu = json.load(f)
+    with open(f'{pathlib.Path().absolute()}/mainapp/templates/mainapp/json/same_products.json') as f:
+        same_products = json.load(f)
     content = {
         'title': title,
+        'links_menu': links_menu,
+        'same_products': same_products,
     }
     return render(request, 'mainapp/products.html', content)
 
@@ -39,8 +33,11 @@ def products(request):
 def contact(request):
     title = 'контакты'
     visit_date = datetime.datetime.now()
+    with open(f'{pathlib.Path().absolute()}/mainapp/templates/mainapp/json/locations.json') as f:
+        locations = json.load(f)
     content = {
         'title': title,
         'visit_date': visit_date,
+        'locations': locations,
     }
     return render(request, 'mainapp/contact.html', content)
