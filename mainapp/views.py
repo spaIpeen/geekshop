@@ -1,40 +1,42 @@
-from django.shortcuts import render
 import datetime
 import json
 import pathlib
-from .models import Product, ProductCategory
+
 from django.conf import settings
+from django.shortcuts import render
+
+from .models import Product, ProductCategory
 
 
 def main(request):
-    title = 'главная'
+    title = "главная"
     products = Product.objects.all()[:3]
     content = {
-        'title': title,
-        'products': products,
-        'media_url': settings.MEDIA_URL,
+        "title": title,
+        "products": products,
+        "media_url": settings.MEDIA_URL,
     }
 
-    return render(request, 'mainapp/index.html', content)
+    return render(request, "mainapp/index.html", content)
 
 
 def products(request, pk=None):
-    title = 'продукты'
+    title = "продукты"
     links_menu = ProductCategory.objects.all()
     same_products = Product.objects.all()
     content = {
-        'title': title,
-        'links_menu': links_menu,
-        'same_products': same_products,
-        'media_url': settings.MEDIA_URL,
+        "title": title,
+        "links_menu": links_menu,
+        "same_products": same_products,
+        "media_url": settings.MEDIA_URL,
     }
     if pk:
-        print(f'User select category: {pk}')
-    return render(request, 'mainapp/products.html', content)
+        print(f"User select category: {pk}")
+    return render(request, "mainapp/products.html", content)
 
 
 def contact(request):
-    title = 'контакты'
+    title = "контакты"
     visit_date = datetime.datetime.now()
     locations = [
         {"city": "Москва", "phone": "+7-888-888-8888", "email": "info@geekshop.ru", "address": "В пределах МКАД"},
@@ -52,8 +54,8 @@ def contact(request):
         },
     ]
     content = {
-        'title': title,
-        'visit_date': visit_date,
-        'locations': locations,
+        "title": title,
+        "visit_date": visit_date,
+        "locations": locations,
     }
-    return render(request, 'mainapp/contact.html', content)
+    return render(request, "mainapp/contact.html", content)
