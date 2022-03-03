@@ -8,7 +8,7 @@ from django.conf import settings
 
 def main(request):
     title = 'главная'
-    products = Product.objects.all()
+    products = Product.objects.all()[:3]
     content = {
         'title': title,
         'products': products,
