@@ -76,8 +76,11 @@
 					<img src="{% static 'img/' %}{{ same_product.image_src }}" alt="{{ same_product.image_alt }}">
 					<div class="text">
 						<img src="{% static 'img/icon-hover.png' %}" alt="img">
-						<h4>{{ same_product.name }}</h4>
-						<p>{{ same_product.desc }}</p>
+						<h3>Категория: {{ same_product.category.name }}</h3>
+						<h4>Название: {{ same_product.name }}</h4>
+						<p>Описание: {{ same_product.desc }}</p>
+						<p>Цена: {{ same_product.price }}</p>
+						<p>На складе: {{ same_product.quantity }}</p>
 					</div>
 				</a>
 			</div>
