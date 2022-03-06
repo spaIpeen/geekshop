@@ -1,43 +1,61 @@
-from django.shortcuts import render
 import datetime
 import json
 import pathlib
 
+from django.conf import settings
+from django.shortcuts import render
+
+from .models import Product, ProductCategory
+
 
 def main(request):
-    title = 'главная'
-    with open(f'{pathlib.Path().absolute()}/mainapp/templates/mainapp/json/products.json') as f:
-        products = json.load(f)
+    title = "главная"
+    products = Product.objects.all()[:3]
     content = {
-        'title': title,
-        'products': products,
+        "title": title,
+        "products": products,
+        "media_url": settings.MEDIA_URL,
     }
 
-    return render(request, 'mainapp/index.html', content)
+    return render(request, "mainapp/index.html", content)
 
 
-def products(request):
-    title = 'продукты'
-    with open(f'{pathlib.Path().absolute()}/mainapp/templates/mainapp/json/links.json') as f:
-        links_menu = json.load(f)
-    with open(f'{pathlib.Path().absolute()}/mainapp/templates/mainapp/json/same_products.json') as f:
-        same_products = json.load(f)
+def products(request, pk=None):
+    title = "продукты"
+    links_menu = ProductCategory.objects.all()
+    same_products = Product.objects.all()
     content = {
-        'title': title,
-        'links_menu': links_menu,
-        'same_products': same_products,
+        "title": title,
+        "links_menu": links_menu,
+        "same_products": same_products,
+        "media_url": settings.MEDIA_URL,
     }
-    return render(request, 'mainapp/products.html', content)
+    if pk:
+        print(f"User select category: {pk}")
+    return render(request, "mainapp/products.html", content)
 
 
 def contact(request):
-    title = 'контакты'
+    title = "контакты"
     visit_date = datetime.datetime.now()
-    with open(f'{pathlib.Path().absolute()}/mainapp/templates/mainapp/json/locations.json') as f:
-        locations = json.load(f)
+    locations = [
+        {"city": "Москва", "phone": "+7-888-888-8888", "email": "info@geekshop.ru", "address": "В пределах МКАД"},
+        {
+            "city": "Екатеринбург",
+            "phone": "+7-777-777-7777",
+            "email": "info_yekaterinburg@geekshop.ru",
+            "address": "Близко к центру",
+        },
+        {
+            "city": "Владивосток",
+            "phone": "+7-999-999-9999",
+            "email": "info_vladivostok@geekshop.ru",
+            "address": "Близко к океану",
+        },
+    ]
     content = {
-        'title': title,
-        'visit_date': visit_date,
-        'locations': locations,
+        "title": title,
+        "visit_date": visit_date,
+        "locations": locations,
     }
-    return render(request, 'mainapp/contact.html', content)
+    return render(request, "mainapp/contact.html", content)
