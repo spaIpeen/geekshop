@@ -17,5 +17,5 @@ class Migration(migrations.Migration):
                 ("name", models.CharField(max_length=64, unique=True, verbose_name="имя")),
                 ("description", models.TextField(blank=True, verbose_name="описание")),
             ],
-        ),
+        )
     ]
