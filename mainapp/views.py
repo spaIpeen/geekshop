@@ -5,17 +5,13 @@ import pathlib
 from django.conf import settings
 from django.shortcuts import render
 
-from .models import Product, ProductCategory
+from .models import Product, ProductCategory, Contact
 
 
 def main(request):
     title = "главная"
-    products = Product.objects.all()[:3]
-    content = {
-        "title": title,
-        "products": products,
-        "media_url": settings.MEDIA_URL,
-    }
+    products = Product.objects.all()[:4]
+    content = {"title": title, "products": products, "media_url": settings.MEDIA_URL}
 
     return render(request, "mainapp/index.html", content)
 
@@ -36,26 +32,8 @@ def products(request, pk=None):
 
 
 def contact(request):
-    title = "контакты"
+    title = "о нас"
     visit_date = datetime.datetime.now()
-    locations = [
-        {"city": "Москва", "phone": "+7-888-888-8888", "email": "info@geekshop.ru", "address": "В пределах МКАД"},
-        {
-            "city": "Екатеринбург",
-            "phone": "+7-777-777-7777",
-            "email": "info_yekaterinburg@geekshop.ru",
-            "address": "Близко к центру",
-        },
-        {
-            "city": "Владивосток",
-            "phone": "+7-999-999-9999",
-            "email": "info_vladivostok@geekshop.ru",
-            "address": "Близко к океану",
-        },
-    ]
-    content = {
-        "title": title,
-        "visit_date": visit_date,
-        "locations": locations,
-    }
+    locations = Contact.objects.all()
+    content = {"title": title, "visit_date": visit_date, "locations": locations}
     return render(request, "mainapp/contact.html", content)
