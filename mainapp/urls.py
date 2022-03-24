@@ -4,4 +4,7 @@ import mainapp.views as mainapp
 
 app_name = "mainapp"
 
-urlpatterns = [path("", mainapp.products, name="index"), path("<int:pk>/", mainapp.products, name="category")]
+urlpatterns = [
+    path("", mainapp.products, name="index"),
+    path("category/<int:pk>/", mainapp.products, name="category"),
+]
