@@ -4,7 +4,7 @@ from django.utils import timezone
 
 from basketapp.models import Basket
 
-from .models import Product, ProductCategory, Contact
+from .models import Contact, Product, ProductCategory
 
 
 def main(request):
@@ -26,27 +26,27 @@ def products(request, pk=None):
         # print(f'basket / _basket: {len(_basket)} / {len(basket)}')
     if pk is not None:
         if pk == 0:
-            products = Product.objects.all().order_by('price')
-            category = {'name': 'все'}
+            products = Product.objects.all().order_by("price")
+            category = {"name": "все"}
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
-            products = Product.objects.filter(category__pk=pk).order_by('price')
+            products = Product.objects.filter(category__pk=pk).order_by("price")
         content = {
-            'title': title,
-            'links_menu': links_menu,
-            'category': category,
-            'products': products,
-            'media_url': settings.MEDIA_URL,
-            'basket': basket,
+            "title": title,
+            "links_menu": links_menu,
+            "category": category,
+            "products": products,
+            "media_url": settings.MEDIA_URL,
+            "basket": basket,
         }
-        return render(request, 'mainapp/products_list.html', content)
+        return render(request, "mainapp/products_list.html", content)
     same_products = Product.objects.all()
     content = {
         "title": title,
         "links_menu": links_menu,
         "same_products": same_products,
         "media_url": settings.MEDIA_URL,
-        'basket': basket,
+        "basket": basket,
     }
     if pk:
         print(f"User select category: {pk}")
