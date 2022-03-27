@@ -155,7 +155,7 @@ html, body {
 }
 
 .category-products .block:nth-child(3n) {
-	margin-right: 0;
+	margin-right: 0px;
 }
 
 .category-products a .text {
@@ -264,14 +264,15 @@ html, body {
 
 .slider {
 	height: 800px;
-	background-image: url(../img/slider.jpg);
-	padding-left: 98px;
+	background-image: url(/static/img/slider.jpg);
+	/*padding-left: 98px;*/
+	padding-left: 78px;
 	padding-right: 211px;
 	position: relative;
 }
 
 .logo {
-	background-image: url(../img/logo.png);
+	background-image: url(/static/img/logo.png);
 	margin-top: 63px;
 	width: 185px;
 	height: 22px;
@@ -320,27 +321,30 @@ html, body {
 	display: block;
 	width: 23px;
 	height: 23px;
-	background-image: url(../img/search.png);
+	background-image: url(/static/img/search.png);
 	position: absolute;
 	top: 63px;
-	left: 1176px;
+	/*left: 1176px;*/
+	left: 1146px;
 }
 
 .basket {
 	display: block;
 	width: 23px;
 	height: 23px;
-	background-image: url(../img/basket.png);
+	background-image: url(/static/img/basket.png);
 	position: absolute;
 	top: 63px;
-	left: 1210px;
+	/*left: 1210px;*/
+	left: 1180px;
 	text-decoration: none;
 	color: #555;
 }
 
 .basket span {
-	margin-left: 25px;
-	font-size:10px
+	display: block;
+	margin-left: 30px;
+	width: 150px;
 }
 
 .clearfix:after {
@@ -364,7 +368,7 @@ html, body {
 
 .button-order {
 	background-color: #ffffff;
-	box-shadow: 0 2px 5px 0 rgba(33, 33, 33, 0.35);
+	box-shadow: 0px 2px 4.85px 0.15px rgba(33, 33, 33, 0.35);
 	width: 212px;
 	height: 45px;
 	display: block;
@@ -431,7 +435,7 @@ html, body {
 	border-radius: 50%;
 	background-color: rgba(33, 33, 33, 0.2);
 	float: left;
-	margin: 0 5px;
+	margin: 0px 5px;
 }
 
 .navi a:nth-child(2) {
@@ -441,14 +445,14 @@ html, body {
 	border-radius: 50%;
 	background-color: #212121;
 	float: left;
-	margin: 0;
+	margin: 0px;
 }
 
 .navi a:hover {
 	width: 40px;
 	height: 40px;
 	background-color: #212121;
-	margin: 0;
+	margin: 0px;
 }
 
 .featured {
@@ -572,14 +576,14 @@ html, body {
 }
 
 .promo-content-1 {
-	background-image: url(../img/promo-img1.jpg);
+	background-image: url(/static/img/promo-img1.jpg);
 	width: 683px;
 	height: 683px;
 	float: left;
 }
 
 .promo-content-2 {
-	background-image: url(../img/promo-img2.jpg);
+	background-image: url(/static/img/promo-img2.jpg);
 	width: 683px;
 	height: 683px;
 	float: right;
@@ -696,7 +700,7 @@ html, body {
 	margin-top: 105px;
 	height: 800px;
 	padding-left: 98px;
-	background-image: url(../img/slider-hotdeal.jpg);
+	background-image: url(/static/img/slider-hotdeal.jpg);
 	position: relative;
 }
 
@@ -727,7 +731,7 @@ html, body {
 	height: 570px;
 	width: 570px;
 	float: left;
-	background-image: url(../img/product-1-lg.jpg);
+	background-image: url(/static/img/product-1-lg.jpg);
 }
 
 .exclusive-small {
@@ -796,7 +800,7 @@ html, body {
 .mobile {
 	height: 516px;
 	margin-top: 90px;
-	background-image: url(../img/mobile-back.jpg);
+	background-image: url(/static/img/mobile-back.jpg);
 	padding-left: 99px;
 	position: relative;
 }
@@ -972,14 +976,15 @@ td:first-child {
 }
 
 .social1 {
-	background: url(../img/social-links.png);
+	background: url(/static/img/social-links.png);
 	height: 28px;
 	width: 28px;
 	float: left;
 }
 
 .social2 {
-	background: url(../img/social-links.png) -34px 0;
+	background: url(/static/img/social-links.png);
+	background-position: -34px 0px;
 	height: 28px;
 	width: 28px;
 	float: left;
@@ -987,7 +992,8 @@ td:first-child {
 }
 
 .social3 {
-	background: url(../img/social-links.png) -67px 0;
+	background: url(/static/img/social-links.png);
+	background-position: -67px 0px;
 	height: 28px;
 	width: 28px;
 	float: left;
@@ -995,7 +1001,8 @@ td:first-child {
 }
 
 .social4 {
-	background: url(../img/social-links.png) -101px 0;
+	background: url(/static/img/social-links.png);
+	background-position: -101px 0px;
 	height: 28px;
 	width: 28px;
 	float: left;
@@ -1025,24 +1032,24 @@ td:first-child {
 }
 
 .location {
-	padding: 0 97px;
+	padding: 0px 97px;
 }
 
 .location-1 {
 	height: 368px;
 	width: 368px;
 	border: 1px solid #9c9c9c;
-	margin: 71px 28px 122px 0;
+	margin: 71px 28px 122px 0px;
 	float: left;
 }
 
 .location-1:last-child {
-	margin: 71px 0 122px 0;
+	margin: 71px 0px 122px 0px;
 }
 
 .location i {
 	display: block;
-	margin: 48px auto 0;
+	margin: 48px auto 0px;
 	width: 38px;
 }
 
@@ -1089,7 +1096,7 @@ td:first-child {
 	font-size: 18px;
 	font-weight: 700;
 	text-decoration: none;
-	padding: 0 35px 16px 7px;
+	padding: 0px 35px 16px 7px;
 	letter-spacing: 1px;
 }
 
@@ -1111,7 +1118,7 @@ td:first-child {
 }
 
 .products-box {
-	padding: 0 83px;
+	padding: 0px 83px;
 }
 
 .products {
@@ -1190,7 +1197,7 @@ td:first-child {
 }
 
 .links-menu {
-	margin: 27px auto 0;
+	margin: 27px auto 0px;
 	position: absolute;
 }
 
@@ -1230,7 +1237,8 @@ td:first-child {
 	padding-left: 98px;
 	padding-right: 98px;
 	margin-top: 98px;
-	height: 651px;
+	/*height: 651px; */
+	height: 551px;
 }
 
 .details-slider {
@@ -1241,13 +1249,14 @@ td:first-child {
 
 .slider-product {
 	width: 570px;
-	height: 570px;
+	/*height: 570px;*/
+	height: 400px;
 }
 
 .slider-control {
 	width: 420px;
 	height: 70px;
-	margin: 11px auto 0;
+	margin: 11px auto 0px;
 	padding-left: 150px
 }
 
@@ -1286,7 +1295,7 @@ td:first-child {
 	font-weight: 700;
 	text-align: center;
 	margin-top: 47px;
-	margin-bottom: 0;
+	margin-bottom: 0px;
 }
 
 .description .red {
@@ -1329,7 +1338,8 @@ td:first-child {
 	color: #ffffff;
 	font-size: 22px;
 	font-weight: 700;
-	box-shadow: 0 2px 5px 0 rgba(33, 33, 33, 0.35);
+	line-height: 24px;
+	box-shadow: 0px 2px 4.85px 0.15px rgba(33, 33, 33, 0.35);
 	line-height: 70px;
 	letter-spacing: 6px;
 	margin-top: 31px;
@@ -1358,20 +1368,23 @@ td:first-child {
 }
 
 .related {
-	padding: 0 98px;
+	padding: 0px 98px;
 }
 
 .related .title {
-	height: 343px;
+	/*height: 343px;*/
+	height: 143px;
 	margin-right: 0;
 }
 
 .related .title h2 {
-	margin-top: 245px;
+	/*margin-top: 245px;*/
+	margin-top: 45px;
 }
 
 .related .title .explore {
-	margin-top: 262px;
+	/*margin-top: 262px;*/
+	margin-top: 62px;
 }
 
 .related-products {
@@ -1392,7 +1405,7 @@ td:first-child {
 }
 
 .related-products .block:nth-child(3n) {
-	margin-right: 0;
+	margin-right: 0px;
 }
 
 .related-products a .text {
