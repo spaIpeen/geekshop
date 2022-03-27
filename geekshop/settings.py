@@ -138,4 +138,4 @@ AUTH_USER_MODEL = "authapp.ShopUser"
 
 # Set login path:
 #   https://docs.djangoproject.com/en/2.2/ref/settings/#login-url
-LOGIN_URL = "authnapp:login"
+LOGIN_URL = "authapp:login"
