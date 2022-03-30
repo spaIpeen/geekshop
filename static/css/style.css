@@ -195,6 +195,23 @@ body {
     text-decoration: none;
 }
 
+.admin_bottom_new_item .new_category{
+    margin-left: 200px;
+}
+
+.admin_bottom_new_item button {
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    height: 30px;
+    margin: 5px auto;
+    padding: 0 15px;
+}
+
+.admin_bottom_new_item a {
+    color: #555;
+    text-decoration: none;
+}
+
 .categories_list {
     margin-left: 150px;
 }
@@ -280,7 +297,7 @@ body {
     text-decoration: none;
 }
 
-.users_list .new_user {
+.admin_bottom_new_item .new_user {
     margin-left: 190px;
 }
 

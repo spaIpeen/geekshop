@@ -8,6 +8,9 @@ from authapp.forms import ShopUserRegisterForm
 from authapp.models import ShopUser
 from mainapp.models import Product, ProductCategory
 
+from django.http import JsonResponse
+from django.template.loader import render_to_string
+
 
 @user_passes_test(lambda u: u.is_superuser)
 def admin_main(request):
@@ -61,8 +64,21 @@ def user_update(request, pk):
 @user_passes_test(lambda u: u.is_superuser)
 def user_delete(request, pk):
     title = "пользователи/удаление"
-
     user = get_object_or_404(ShopUser, pk=pk)
+    users_list = ShopUser.objects.all().order_by("-is_active", "-is_superuser", "-is_staff", "username")
+
+    if request.is_ajax():
+        print(f"{pk}")
+        user = ShopUser.objects.get(pk=int(pk))
+        if not user.is_active:
+            user.is_active = True
+            user.save()
+        else:
+            user.is_active = False
+            user.save()
+        content = {"objects": users_list, "media_url": settings.MEDIA_URL}
+        result = render_to_string("adminapp/includes/inc_users_list.html", content)
+        return JsonResponse({"result": result})
 
     if request.method == "POST":
         # user.delete()
@@ -122,8 +138,21 @@ def category_update(request, pk):
 @user_passes_test(lambda u: u.is_superuser)
 def category_delete(request, pk):
     title = "категории/удаление"
-
     category = get_object_or_404(ProductCategory, pk=pk)
+    category_list = ProductCategory.objects.all()
+
+    if request.is_ajax():
+        print(f"{pk}")
+        category = ProductCategory.objects.get(pk=int(pk))
+        if not category.is_active:
+            category.is_active = True
+            category.save()
+        else:
+            category.is_active = False
+            category.save()
+        content = {"objects": category_list, "media_url": settings.MEDIA_URL}
+        result = render_to_string("adminapp/includes/inc_categories_list.html", content)
+        return JsonResponse({"result": result})
 
     if request.method == "POST":
         category.is_active = False
