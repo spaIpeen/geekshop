@@ -1,0 +1,13 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="admin_bottom_new_item">
+    <button class="new_category">
+    <a href="{% url 'admin:category_create' %}">новая категория</a>
+</button>
+</div>
+<div class="categories_list">
+    {% include 'adminapp/includes/inc_categories_list.html' %}
+</div>
+{% endblock %}

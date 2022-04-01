@@ -1,0 +1,13 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="admin_bottom_new_item">
+    <button class="new_user">
+        <a href="{% url 'admin:user_create' %}">новый пользователь</a>
+    </button></div>
+<div class="users_list">
+    {% include 'adminapp/includes/inc_users_list.html' %}
+</div>
+{% endblock content %}
