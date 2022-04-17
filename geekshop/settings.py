@@ -181,8 +181,10 @@ EMAIL_FILE_PATH = "tmp/email-messages/"
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "social_core.backends.github.GithubOAuth2",
+    'social_core.backends.vk.VKOAuth2',
 )
 
+# Register GitHub
 with open(
     os.path.join(BASE_DIR, "tmp", "secrets", "github.json"), "r"
 ) as secrets:
@@ -190,3 +192,12 @@ with open(
 
 SOCIAL_AUTH_GITHUB_KEY = github_auth["client_id"]
 SOCIAL_AUTH_GITHUB_SECRET = github_auth["client_secret"]
+
+# Register VK
+with open(
+    os.path.join(BASE_DIR, "tmp", "secrets", "vk.json"), "r"
+) as secrets:
+    vk_auth = json.load(secrets)
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = vk_auth["client_id"]
+SOCIAL_AUTH_VK_OAUTH2_SECRET = vk_auth["client_secret"]
