@@ -10,9 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import json
 import os
 from pathlib import Path
-import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -181,8 +181,8 @@ EMAIL_FILE_PATH = "tmp/email-messages/"
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "social_core.backends.github.GithubOAuth2",
-    'social_core.backends.vk.VKOAuth2',
-    'social_core.backends.google.GoogleOAuth2',
+    "social_core.backends.vk.VKOAuth2",
+    "social_core.backends.google.GoogleOAuth2",
 )
 
 # Register GitHub
@@ -195,9 +195,7 @@ SOCIAL_AUTH_GITHUB_KEY = github_auth["client_id"]
 SOCIAL_AUTH_GITHUB_SECRET = github_auth["client_secret"]
 
 # Register VK
-with open(
-    os.path.join(BASE_DIR, "tmp", "secrets", "vk.json"), "r"
-) as secrets:
+with open(os.path.join(BASE_DIR, "tmp", "secrets", "vk.json"), "r") as secrets:
     vk_auth = json.load(secrets)
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = vk_auth["client_id"]
