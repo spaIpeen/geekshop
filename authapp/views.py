@@ -1,10 +1,11 @@
 from django.conf import settings
 from django.contrib import auth
 from django.core.mail import send_mail
+from django.db import transaction
 from django.shortcuts import HttpResponseRedirect, render
 from django.urls import reverse
 
-from authapp.forms import ShopUserEditForm, ShopUserLoginForm, ShopUserRegisterForm
+from authapp.forms import ShopUserEditForm, ShopUserLoginForm, ShopUserProfileEditForm, ShopUserRegisterForm
 from authapp.models import ShopUser
 
 
@@ -54,18 +55,22 @@ def register(request):
     return render(request, "authapp/register.html", content)
 
 
+@transaction.atomic
 def edit(request):
     title = "редактирование"
 
     if request.method == "POST":
         edit_form = ShopUserEditForm(request.POST, request.FILES, instance=request.user)
-        if edit_form.is_valid():
+        profile_form = ShopUserProfileEditForm(request.POST, instance=request.user.shopuserprofile)
+        if edit_form.is_valid() and profile_form.is_valid():
             edit_form.save()
             return HttpResponseRedirect(reverse("auth:edit"))
     else:
         edit_form = ShopUserEditForm(instance=request.user)
+        profile_form = ShopUserProfileEditForm(instance=request.user.shopuserprofile)
 
-    content = {"title": title, "edit_form": edit_form, "media_url": settings.MEDIA_URL}
+    content = {"title": title, "edit_form": edit_form, "profile_form": profile_form, "media_url": settings.MEDIA_URL}
+
     return render(request, "authapp/edit.html", content)
 
 
@@ -94,11 +99,11 @@ def verify(request, email, activation_key):
             print(f"user {user} is activated")
             user.is_active = True
             user.save()
-            auth.login(request, user)
+            auth.login(request, user, backend="django.contrib.auth.backends.ModelBackend")
 
-            return render(request, "authnapp/verification.html")
+            return render(request, "authapp/verification.html")
         print(f"error activation user: {user}")
-        return render(request, "authnapp/verification.html")
+        return render(request, "authapp/verification.html")
 
     except Exception as e:
         print(f"error activation user : {e.args}")
