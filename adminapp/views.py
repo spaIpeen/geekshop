@@ -11,6 +11,7 @@ from adminapp.forms import ProductCategoryEditForm, ProductEditForm, ShopUserAdm
 from authapp.forms import ShopUserRegisterForm
 from authapp.models import ShopUser
 from mainapp.models import Product, ProductCategory
+from ordersapp.models import Order
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -182,3 +183,11 @@ def product_delete(request, pk):
 
     content = {"title": title, "product_to_delete": product, "media_url": settings.MEDIA_URL}
     return render(request, "adminapp/product_delete.html", content)
+
+
+class OrderList(LoginRequiredMixin, ListView):
+    model = Order
+    template_name = "adminapp/order_list.html"
+
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user)
