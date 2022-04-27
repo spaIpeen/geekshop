@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "mainapp",
-    "authnapp",
+    "authapp",
     "basketapp",
     "adminapp",
     "social_django",
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
 ]
 
 # Auth model
-AUTH_USER_MODEL = "authnapp.ShopUser"
+AUTH_USER_MODEL = "authapp.ShopUser"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -153,7 +153,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Set login path:
 #   https://docs.djangoproject.com/en/3.2/ref/settings/#login-url
-LOGIN_URL = "authnapp:login"
+LOGIN_URL = "authapp:login"
 
 DOMAIN_NAME = "http://localhost:8000"
 
