@@ -11,7 +11,6 @@ from adminapp.forms import ProductCategoryEditForm, ProductEditForm, ShopUserAdm
 from authapp.forms import ShopUserRegisterForm
 from authapp.models import ShopUser
 from mainapp.models import Product, ProductCategory
-from ordersapp.models import Order
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -104,6 +103,12 @@ class ProductCategoryUpdateView(LoginRequiredMixin, UpdateView):
         context["title"] = "категории/редактирование"
         return context
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        if self.object.is_active:
+            self.object.product_set.update(is_active=True)
+        return response
+
 
 class ProductCategoryDeleteView(LoginRequiredMixin, DeleteView):
     model = ProductCategory
@@ -114,6 +119,7 @@ class ProductCategoryDeleteView(LoginRequiredMixin, DeleteView):
         self.object = self.get_object()
         self.object.is_active = False
         self.object.save()
+        self.object.product_set.update(is_active=False)
         return HttpResponseRedirect(self.get_success_url())
 
 
