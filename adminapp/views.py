@@ -183,11 +183,3 @@ def product_delete(request, pk):
 
     content = {"title": title, "product_to_delete": product, "media_url": settings.MEDIA_URL}
     return render(request, "adminapp/product_delete.html", content)
-
-
-class OrderList(LoginRequiredMixin, ListView):
-    model = Order
-    template_name = "adminapp/order_list.html"
-
-    def get_queryset(self):
-        return Order.objects.filter(user=self.request.user)

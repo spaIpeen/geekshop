@@ -21,5 +21,4 @@ urlpatterns = [
     re_path(r"^products/read/(?P<pk>\d+)/$", adminapp.ProductDetailView.as_view(), name="product_read"),
     re_path(r"^products/update/(?P<pk>\d+)/$", adminapp.product_update, name="product_update"),
     re_path(r"^products/delete/(?P<pk>\d+)/$", adminapp.product_delete, name="product_delete"),
-    re_path(r"^orders/read/$", adminapp.OrderList.as_view(), name="orders"),
 ]
