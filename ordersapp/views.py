@@ -8,6 +8,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.views.generic.detail import DetailView
 from django.http import JsonResponse
+from django.db.models import F
 
 from basketapp.models import Basket
 from mainapp.models import Product
@@ -131,18 +132,16 @@ def order_forming_complete(request, pk):
 @receiver(pre_save, sender=Basket)
 def product_quantity_update_save(instance, sender, **kwargs):
     if instance.pk:
-        """If user change quantity in order or basket"""
-        instance.product.quantity -= instance.quantity - sender.get_item(instance.pk).quantity
+        instance.product.quantity = F("quantity") - (instance.quantity - sender.get_item(instance.pk).quantity)
     else:
-        """If user create order or basket"""
-        instance.product.quantity -= instance.quantity
+        instance.product.quantity = F("quantity") - instance.quantity
     instance.product.save()
 
 
 @receiver(pre_delete, sender=OrderItem)
 @receiver(pre_delete, sender=Basket)
 def product_quantity_update_delete(instance, **kwargs):
-    instance.product.quantity += instance.quantity
+    instance.product.quantity = F("quantity") + instance.quantity
     instance.product.save()
 
 
