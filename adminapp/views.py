@@ -6,6 +6,8 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 from adminapp.forms import ProductCategoryEditForm, ProductEditForm, ShopUserAdminEditForm
 from authapp.forms import ShopUserRegisterForm
@@ -103,12 +105,6 @@ class ProductCategoryUpdateView(LoginRequiredMixin, UpdateView):
         context["title"] = "категории/редактирование"
         return context
 
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        if self.object.is_active:
-            self.object.product_set.update(is_active=True)
-        return response
-
 
 class ProductCategoryDeleteView(LoginRequiredMixin, DeleteView):
     model = ProductCategory
@@ -119,7 +115,6 @@ class ProductCategoryDeleteView(LoginRequiredMixin, DeleteView):
         self.object = self.get_object()
         self.object.is_active = False
         self.object.save()
-        self.object.product_set.update(is_active=False)
         return HttpResponseRedirect(self.get_success_url())
 
 
@@ -189,3 +184,20 @@ def product_delete(request, pk):
 
     content = {"title": title, "product_to_delete": product, "media_url": settings.MEDIA_URL}
     return render(request, "adminapp/product_delete.html", content)
+
+
+def db_profile_by_type(prefix, type, queries):
+    update_queries = list(filter(lambda x: type in x["sql"], queries))
+    print(f"db_profile {type} for {prefix}:")
+    [print(query["sql"]) for query in update_queries]
+
+
+@receiver(pre_save, sender=ProductCategory)
+def product_is_active_update_productcategory_save(sender, instance, **kwargs):
+    if instance.pk:
+        if instance.is_active:
+            instance.product_set.update(is_active=True)
+        else:
+            instance.product_set.update(is_active=False)
+
+        # db_profile_by_type(sender, 'UPDATE', connection.queries)
